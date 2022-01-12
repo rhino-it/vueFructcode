@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="app">
+        <h1>{{ store_name }}</h1>
+        <div class="main">
+            <ul class="cards">
+                <li class="cards_item" v-for="product in products" :id="product.id">
+                    <div class="card">
+                        <div class="card_image"><img :src="product.img"></div>
+                        <div class="card_content">
+                            <h2 class="card_title">{{ product.title }}</h2>
+                            <p class="card_text">US ${{ product.price }}</p>
+                            <a v-bind:href="product.link" class="btn" :class="{ btn_black: btn.isDark }">{{ btn.title }}</a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            store_name: 'The Store',
+            btn: {
+                title: 'Buy It Now',
+                isDark: true,
+            },
+            products: [
+                {
+                    id: '1a',
+                    title: 'iPhone XR',
+                    price: 899,
+                    link: 'https://fructcode.com',
+                    img: 'images/large.jpg'
+                },
+                {
+                    id: '2b',
+                    title: 'iPhone XS MAX',
+                    price: 1099,
+                    link: 'https://fructcode.com',
+                    img: 'images/large.jpg'
+                },
+                {
+                    id: '3c',
+                    title: 'iPhone X',
+                    price: 1000,
+                    link: 'https://fructcode.com',
+                    img: 'images/large.jpg'
+                },
+            ],
+        }
+    })
+    </script>
+</body>
+
+</html>

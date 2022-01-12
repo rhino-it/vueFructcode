@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FructCode VueJS</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/style3.css">
+</head>
+<body>
+    <div id="app">
+        <div class="wrapper">
+            <div class="control-panel">
+                <p class="profile-hello">
+                    Привет, {{ fullName }}!
+                    <input type="text" v-model="tempName">
+                    <button v-on:click="setName()"> Set </button>
+                    <button v-on:click="rndValue()"> {{rndNum}} </button>
+                </p>
+            </div>
+
+            <div class="profile-card">
+                <div class="profile-header">
+                    <img :src="profile_back_img">
+                </div>
+                <div class="profile-body">
+                    <div class="user-img">
+                        <img :src="profile_img">
+                    </div>
+
+                    <div class="name">{{ first_name.toUpperCase() + ' ' + last_name }}</div>
+
+                    <div class="bio">
+                        <p>{{ bio }}</p>
+                    </div>
+                    <div class="social-icon">
+                        <ul>
+                            <li v-for="(item, key) in social_links">
+                                <a :href="item" target="_blank">
+                                    <i class="fa" :class="key"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                tempName: '',
+                rndNum: 0,
+                first_name: 'Sergei',
+                last_name: 'Nikonov',
+                bio: 'Автор курсов программирования и основатель проекта FructCode',
+                profile_img: 'https://fructcode.com/uploads/user/photo/5a711ac714ad7.jpg',
+                profile_back_img: 'https://fructcode.com/uploads/img/blog/13ee471281559f0812396e5153452c52/a768558507_fructcode.jpg',
+                social_links: {
+                    'fa-facebook-f': 'https://www.facebook.com/fructcodecom/',
+                    'fa-vk': 'https://vk.com/fructcodecom',
+                    'fa-youtube': 'https://www.youtube.com/channel/UCXneQRoicIlzKJe_yKnYt4g',
+                    'fa-instagram': 'https://www.instagram.com/fructcodecom/',
+                }
+            },
+            methods: {
+                getFullName: function () {
+                    console.log('getFullName Method');
+                    return this.first_name.toUpperCase() + ' ' + this.last_name;
+                },
+                rndValue: function () {
+                    this.rndNum = Math.floor((Math.random() * 100) + 1);
+                },
+                setName: function () {
+                    this.fullName = this.tempName;
+                }
+            },
+            computed: {
+                fullName: {
+                    get: function () {
+                        return this.first_name.toUpperCase() + ' ' + this.last_name;
+                    },
+                    set: function (value) {
+                        let names = value.split(' ');
+                        this.first_name = names[0];
+                        this.last_name = names[names.length - 1];
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
